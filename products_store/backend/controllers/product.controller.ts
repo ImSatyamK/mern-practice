@@ -5,9 +5,9 @@ import mongoose from "mongoose";
 export async function getProducts(req: Request, res: Response) {
     try{
         const products = await Product.find({})
-        res.status(200).json({success: true, message: 'data fetched successfully', data: products})
+        res.status(200).json({success: true, message: 'Data fetched successfully', data: products})
     } catch(error){
-        console.log("error in fetching products:", error instanceof Error? error.message: error);
+        console.log("Error in fetching products:", error instanceof Error? error.message: error);
 		res.status(500).json({ success: false, message: "Server Error" });
     }
 }
@@ -24,8 +24,8 @@ export async function createProduct(req: Request, res: Response) {
         await newProduct.save();
         return res.status(201).json({ success: true, message: 'Product created successfully', data: newProduct });
     } catch (error) {
-        console.error('Error saving product:', error instanceof Error? error.message : error);
-        return res.status(500).json({ success: false, message: 'Error saving product' });
+        console.error('Error creating product:', error instanceof Error? error.message : error);
+        return res.status(500).json({ success: false, message: 'Error creating product' });
     }
 }
 
@@ -39,10 +39,10 @@ export async function updateProduct(req:Request, res:Response) {
 
     try{
         const updatedProduct = await Product.findByIdAndUpdate(id, product, {new: true})
-        res.status(200).json({success: true, message: 'product updates successfully', data: updatedProduct})
+        res.status(200).json({success: true, message: 'Product updated successfully', data: updatedProduct})
     } catch (error) {
-        console.error('Error saving product:', error instanceof Error? error.message : error);
-        return res.status(500).json({ success: false, message: 'Error saving product' });
+        console.error('Error updating product:', error instanceof Error? error.message : error);
+        return res.status(500).json({ success: false, message: 'Error updating product' });
     }
 }
 
@@ -57,7 +57,7 @@ export async function deleteProduct(req: Request, res: Response) {
         await Product.findByIdAndDelete(id)
         res.status(200).json({ success: true, message: "Product deleted" });
 	} catch (error) {
-		console.log("error in deleting product:", error instanceof Error? error.message: error);
+		console.log("Error in deleting product:", error instanceof Error? error.message: error);
 		res.status(500).json({ success: false, message: "Server Error" });
 	}
 
