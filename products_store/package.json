@@ -8,7 +8,7 @@
   "main": "backend/server.ts",
   "scripts": {
     "dev": "nodemon backend/server.ts",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend && tsc",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend && tsc",
     "start": "node dist/server.js"
   },
   "dependencies": {
