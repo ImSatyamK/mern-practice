@@ -12,6 +12,8 @@ type Product = {
 type ProductStore = {
     products: Product[],
     setProducts: (newProducts: Product[]) => void,
+    notification: Notification,
+    setNotification: (message: string, success: boolean) => void,
     createProduct: (product: Product) => Promise<{
         success: boolean,
         message: any
@@ -32,10 +34,19 @@ type ProductStore = {
 
 }
 
+type Notification = {
+    message: string,
+    success: boolean
+}
+
 export const useProductStore = create<ProductStore>((set)=>({
     products: [],
 
     setProducts: (newProducts: Product[]) => set({ products: newProducts }),
+
+    notification: {message: '', success: false},
+
+    setNotification: (message: string, success: boolean) => set({ notification: { message, success } }),
 
     createProduct: async (product: Product) => {
         if (!product.name ||!product.price || !product.image) {
